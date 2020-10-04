@@ -1,0 +1,78 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int firstOccurence(char letter, string word);
+int sumAscii(string word);
+
+int main()
+{
+    char search = 'A';
+    string testString = "CAT";
+
+    //Test First Occurrence function
+    int indexFound = firstOccurence(search, testString);
+
+    if (indexFound == -1)
+    {
+        cout << "Could not find letter in string." << endl;
+    }
+    else
+    {
+        cout << "Found letter:" << search << " at Index: " << indexFound << endl;
+    }
+
+
+    //Test Sum Ascii function
+    // C = 67, A = 65, T = 84
+
+    int sum = sumAscii(testString);
+
+    cout << "Sum of Ascii Valuse in string:" << sum << endl;
+
+    return 0;
+}
+
+int firstOccurence(char letter, string word)
+{
+    if (word == "" || word == " ")
+    {
+        return -1;
+    }
+
+    if (letter == word[0])
+    {
+        return 0;
+    }
+
+    int index = firstOccurence(letter, word.substr(1));
+
+    if (index == -1)
+    {
+        return -1;
+    }
+    else
+    {
+        return 1 + index;
+    }
+}
+
+int sumAscii(string word)
+{
+    if (word == "" || word == " " || word == "\0")
+    {
+        return -1;
+    }
+
+    if (word.size() == 1)
+    {
+        return word[0];
+    }
+
+    int sum = sumAscii(word.substr(1));
+
+    return sum + word[0];
+}
+
+
+
